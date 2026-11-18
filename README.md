@@ -1,30 +1,31 @@
-一、 对 mini-media-player 源码的具体修改说明
+# 一、 对 mini-media-player 源码的具体修改说明
 
    在源码中的 mmp-tts 组件（负责文本转语音输入的模块）里重构了 handleTts 触发逻辑，主要做了以下两点改进：
 
-1. 增强 tts.speak 与标准服务解析：
+## 1. 增强 tts.speak 与标准服务解析：
    
    ①原版插件对 tts 的支持大多局限于旧式的 tts.<platform>_say 动作（例如 tts.edge_tts_say）或固定的 platform: service。
    
    ②修改后，当检测到 platform 是以 tts. 开头的实体（例如 tts.edge_tts）时，代码会拦截并将其自动转换为 Home Assistant 新版标准的 tts.speak 服务调用，并将目标音箱（media_player_entity_id）、输入框的文本（message）、cache 以及 options（音色、语速等参数）以正确的 JSON 结构发送给后端。
 
-2. 防止误触发点击跳转：
+## 2. 防止误触发点击跳转：
    
    ①修复了当使用自定义 TTS 平台配置时由于属性读取未定义（TypeError: Cannot read properties of undefined）而导致抛出异常、进而误触发卡片默认 tap_action（如跳转到播放器详情页）的 Bug。
 
-二、 配置上的区别对比
+# 二、 配置上的区别对比
 
    原版 mini-media-player 的 TTS 配置较为繁琐或只支持旧版服务，而修改后的版本在配置上更加直观和现代化。
 
-1. 原版（或官方常见）的痛点
+## 1. 原版（或官方常见）的痛点
 
    ①旧版写法：需要写繁琐的 service、service_data，或者只能调用已被 HA 废弃的 _say 后端动作。
    
    ②不支持 target：无法优雅地将 tts.edge_tts 作为服务目标（Target）与音箱实体结合。
 
-2. 修改后的配置，现在你可以直接将 tts.edge_tts 实体写在 platform 里，插件会自动处理好底层的所有参数映射：
+## 2. 修改后的配置，现在你可以直接将 tts.edge_tts 实体写在 platform 里，插件会自动处理好底层的所有参数映射：
 
     ①基础 Edge TTS 播报配置（推荐）
+
 ```YAML
 type: custom:mini-media-player
 entity: media_player.living_room_speaker
@@ -35,6 +36,7 @@ tts:
 ```
 
     ②进阶参数配置（带音色、语速调整）
+
 ```YAML
 type: custom:mini-media-player
 entity: media_player.living_room_speaker
