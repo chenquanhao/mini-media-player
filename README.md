@@ -24,17 +24,18 @@
 
 2. 修改后的配置，现在你可以直接将 tts.edge_tts 实体写在 platform 里，插件会自动处理好底层的所有参数映射：
 
-   ①基础 Edge TTS 播报配置（推荐）
-YAML
+    ①基础 Edge TTS 播报配置（推荐）
+```YAML
 type: custom:mini-media-player
 entity: media_player.living_room_speaker
 name: living_room_speaker
 tts:
   platform: tts.edge_tts
   cache: true
+```
 
-   ②进阶参数配置（带音色、语速调整）
-YAML
+    ②进阶参数配置（带音色、语速调整）
+```YAML
 type: custom:mini-media-player
 entity: media_player.living_room_speaker
 name: living_room_speaker
@@ -46,7 +47,7 @@ tts:
     voice: zh-CN-YunxiNeural  # 可选：云希（男声）、晓晓（女声）等
     rate: "+10%"              # 加快 10% 语速
     volume: "+0dB"            # 音量增益
-
+```
 
 
 # Mini Media Player
