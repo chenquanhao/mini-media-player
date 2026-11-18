@@ -1,5 +1,5 @@
 一、 对 mini-media-player 源码的具体修改说明
-我在源码中的 mmp-tts 组件（负责文本转语音输入的模块）里重构了 handleTts 触发逻辑，主要做了以下两点改进：
+   我在源码中的 mmp-tts 组件（负责文本转语音输入的模块）里重构了 handleTts 触发逻辑，主要做了以下两点改进：
 
 1. 增强 tts.speak 与标准服务解析：
    ①原版插件对 tts 的支持大多局限于旧式的 tts.<platform>_say 动作（例如 tts.edge_tts_say）或固定的 platform: service。
@@ -9,7 +9,7 @@
    ①修复了当使用自定义 TTS 平台配置时由于属性读取未定义（TypeError: Cannot read properties of undefined）而导致抛出异常、进而误触发卡片默认 tap_action（如跳转到播放器详情页）的 Bug。
 
 二、 配置上的区别对比
-原版 mini-media-player 的 TTS 配置较为繁琐或只支持旧版服务，而修改后的版本在配置上更加直观和现代化。
+   原版 mini-media-player 的 TTS 配置较为繁琐或只支持旧版服务，而修改后的版本在配置上更加直观和现代化。
 
 1. 原版（或官方常见）的痛点
    ①旧版写法：需要写繁琐的 service、service_data，或者只能调用已被 HA 废弃的 _say 后端动作。
